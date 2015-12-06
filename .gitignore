@@ -22,3 +22,8 @@ _testmain.go
 *.exe
 *.test
 *.prof
+
+#Wercker intermediates
+_builds/
+_projects/
+_steps/
