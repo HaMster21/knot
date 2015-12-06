@@ -2,7 +2,9 @@ box: golang
 
 build:
   steps:
-    - setup-go-workspace
+    - setup-go-workspace:
+        package-dir: github.com/hamster21/knot
+    - golint
 
     - script:
         name: go get
