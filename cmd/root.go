@@ -34,13 +34,14 @@ var cfgFile string
 var RootCmd = &cobra.Command{
 	Use:   "knot",
 	Short: "A dumb tool trying to preserve your privacy in a distributed network",
-	Long: `knot will read files, track their contents and changes and distribute
-	them to a number of other peers participating. This makes files stored
-	redundantly and makes them easily available.
+	Long: `
+knot will read files, track their contents and changes and distribute
+them to a number of other peers participating. This makes files stored
+redundantly and makes them easily available.
 
-	knot will also try to preserve your privacy by making encrypting the
-	contents of your files, just sharing it with people that you allow
-	explicitly.`,
+knot will also try to preserve your privacy by making encrypting the
+contents of your files, just sharing it with people that you allow
+explicitly.`,
 }
 
 // Execute adds all child commands to the root command sets flags appropriately.
