@@ -43,7 +43,6 @@ var identCmd = &cobra.Command{
 				fmt.Println(lib.NewKObject(bytes.NewBuffer(buf)))
 			}
 		}
-		fmt.Println("ident called")
 	},
 }
 

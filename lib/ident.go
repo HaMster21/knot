@@ -22,6 +22,9 @@ package lib
 
 import (
 	"bytes"
+	"fmt"
+	"github.com/btcsuite/btcutil/base58"
+	"golang.org/x/crypto/sha3"
 	"io"
 )
 
@@ -35,5 +38,12 @@ func NewKObject(data io.Reader) *KObject {
 	if _, err := buf.ReadFrom(data); err != nil {
 		panic(err)
 	}
-	return &KObject{Data: buf.Bytes()}
+
+	var h [64]byte
+	sha3.ShakeSum256(h[:], buf.Bytes())
+	return &KObject{Identifier: h, Data: buf.Bytes()}
+}
+
+func (k *KObject) String() string {
+	return fmt.Sprintf("%s\n\n%s", base58.Encode(k.Identifier[:]), k.Data)
 }
