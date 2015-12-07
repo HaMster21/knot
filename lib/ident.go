@@ -18,35 +18,22 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-package cmd
+package lib
 
 import (
 	"bytes"
-	"fmt"
-	"github.com/hamster21/knot/lib"
-	"github.com/spf13/cobra"
-	"io/ioutil"
+	"io"
 )
 
-// identCmd represents the ident command
-var identCmd = &cobra.Command{
-	Use:   "ident",
-	Short: "Creates an identification string for the provided file",
-	Long: `I'm going to fill this in later :)
-`,
-	Run: func(cmd *cobra.Command, args []string) {
-		for i := range args {
-			buf, err := ioutil.ReadFile(args[i])
-			if err != nil {
-				panic(err)
-			} else {
-				fmt.Println(lib.NewKObject(bytes.NewBuffer(buf)))
-			}
-		}
-		fmt.Println("ident called")
-	},
+type KObject struct {
+	Identifier [64]byte
+	Data       []byte
 }
 
-func init() {
-	RootCmd.AddCommand(identCmd)
+func NewKObject(data io.Reader) *KObject {
+	var buf bytes.Buffer
+	if _, err := buf.ReadFrom(data); err != nil {
+		panic(err)
+	}
+	return &KObject{Data: buf.Bytes()}
 }
